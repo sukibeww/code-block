@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from 'styled-components'
 import Header from "./header"
-import "./layout.css"
 
 const Subheader = styled.h3`
   color: #373737;
