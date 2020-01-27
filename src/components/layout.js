@@ -1,7 +1,7 @@
-import { graphql, Link, useStaticQuery } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
-import styled from "styled-components"
+import { graphql, Link, useStaticQuery } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
 const Content = styled.div`
   padding: 1.45rem 5vh;
@@ -27,7 +27,11 @@ const StyledMain = styled.main`
 const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
+  background-color: #a3a3a3;
+  flex-direction: column;
   width: 100%;
+  padding: 3vh;
+  opacity: 0.8;
 `
 
 const PostExcerpt = styled.p`
@@ -73,6 +77,15 @@ const PostPaper = styled.div`
     box-shadow: 0 5px 5px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
   }
 `
+
+const Links = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: white;
+`
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -125,9 +138,13 @@ const Layout = ({ children }) => {
         </PostContainer>
       </Content>
       <StyledFooter>
-        © {data.site.siteMetadata.author} {new Date().getFullYear()}, Built with - 
-        {`  `}
-        <a style={{textDecoration: "none", color: "#542C85"}} href="https://www.gatsbyjs.org"> - Gatsby</a>
+        <Links>
+        </Links>
+        <Links>
+          <span>
+            © {data.site.siteMetadata.author} {new Date().getFullYear()}, Built with - Gatsby
+          </span>
+        </Links>     
       </StyledFooter>
     </>
   )
