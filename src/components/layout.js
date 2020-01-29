@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Content = styled.div`
   padding: 1.45rem 5vh;
   min-height: 95vh;
+  width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -14,11 +15,14 @@ const Content = styled.div`
   align-items: flex-start;
   padding: 5vw;
   background: repeating-linear-gradient(199deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(78deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(277deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(18deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(91deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(348deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(334deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(261deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(21deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),linear-gradient(90deg, hsl(83,0%,100%),hsl(83,0%,100%));
+  @media (max-width: 425px){
+    flex-direction: column;
+  }
 `
 
 const StyledMain = styled.main`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -32,6 +36,7 @@ const StyledFooter = styled.footer`
   width: 100%;
   padding: 3vh;
   opacity: 0.8;
+  text-align: center;
 `
 
 const PostExcerpt = styled.p`
@@ -41,6 +46,9 @@ const PostExcerpt = styled.p`
 const PostCount = styled.h4`
   align-self: flex-end;
   transform: skew(-3deg, -3deg);
+  @media (max-width: 425px){
+    transform: skew(0deg, 0deg);
+  }
 `
 
 const PostContainer = styled.div`
@@ -48,10 +56,14 @@ const PostContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  padding: 5vh 0;
   max-width: 25%;
   height: 100%;
-  overflow-y: visible;
   position: static;
+  @media (max-width: 425px){
+    max-width: 100%;
+    height: auto;
+  }
 `
 
 const PostsWrapper = styled.div`
@@ -61,6 +73,10 @@ const PostsWrapper = styled.div`
   align-items: flex-start;
   height: 80vh;
   overflow-x: hidden;
+  @media (max-width: 425px){
+    max-width: 100%;
+    height: auto;
+  }
 `
 
 const PostPaper = styled.div`
@@ -75,6 +91,12 @@ const PostPaper = styled.div`
   :hover {
     transform: translate3d(5px, 5px, 0) skew(-3deg, -3deg);
     box-shadow: 0 5px 5px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+  }
+  @media (max-width: 425px){
+    transform: skew(0deg, 0deg);
+    :hover {
+      transform: none;
+    }
   }
 `
 

@@ -12,10 +12,16 @@ const IntroPaper = styled.div`
   align-self: center;
   padding: 20px;
   margin: 10px;
-  width: 60%;
   transform: translate3d(10px, 10px, 0) skew(1deg, 1deg);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  /* transition: all 0.3s cubic-bezier(.25,.8,.25,1); */
+  text-align: justify;
+  width: 75%;
+  @media (max-width: 425px){
+    transform: skew(0deg, 0deg);
+    padding: 20px;
+    margin: 0;
+    width: 100%;
+  }
 `
 
 const IntroContainer = styled.div`
