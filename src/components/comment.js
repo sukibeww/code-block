@@ -5,12 +5,14 @@ import styled from 'styled-components'
 const CommentWrapper = styled.div`
   margin: 8vh 5vw;
   margin-bottom: 0;
+  height: auto;
 `
 
 export default (props) => {
+  console.log(process.env.GATSBY_DISQUS_NAME)
   return (
     <CommentWrapper>
-      <DiscussionEmbed shortname="suki-blog-1" config={props.disqusConfig} />
+      <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={props.disqusConfig} />
     </CommentWrapper>
   )
 }
