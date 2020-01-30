@@ -23,20 +23,7 @@ const Content = styled.div`
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-`
-
-const StyledFooter = styled.footer`
-  display: flex;
-  justify-content: center;
-  background-color: #a3a3a3;
-  flex-direction: column;
-  width: 100%;
-  padding: 3vh;
-  opacity: 0.8;
-  text-align: center;
 `
 
 const PostExcerpt = styled.p`
@@ -100,23 +87,10 @@ const PostPaper = styled.div`
   }
 `
 
-const Links = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  color: white;
-`
-
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
-      site {
-        siteMetadata {
-          author
-        }
-      }
       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
@@ -159,15 +133,6 @@ const Layout = ({ children }) => {
           </PostsWrapper>
         </PostContainer>
       </Content>
-      <StyledFooter>
-        <Links>
-        </Links>
-        <Links>
-          <span>
-            © {data.site.siteMetadata.author} {new Date().getFullYear()}, Built with - Gatsby
-          </span>
-        </Links>     
-      </StyledFooter>
     </>
   )
 }

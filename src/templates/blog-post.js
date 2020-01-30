@@ -1,6 +1,8 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
+import Disqus from "../components/comment"
+import Footer from "../components/footer"
 import Layout from "../components/layout"
 
 const IntroPaper = styled.div`
@@ -39,7 +41,7 @@ const Back = styled.div`
   align-self: flex-start;
   margin: 5px;
   background-position: center;
-  transition: background 0.3s;
+  /* transition: background 0.3s; */
   :hover{
     background: #6c4bfc radial-gradient(circle, transparent 1%, #6c4bfc 1%) center/15000%;
   }
@@ -51,28 +53,40 @@ const BackText = styled.h3`
 `
 
 
-export default ({ data }) => {
+
+export default ({ data, pageContext }) => {
   const post = data.markdownRemark
+  const title = post.frontmatter.title
+  const slug = pageContext.slug
+  const disqusConfig = {
+    shortname: "suki-blog-1",
+    config: { identifier: slug, title },
+  }
   return (
-    <Layout>
-      <IntroContainer>
-        <IntroPaper>
-          <Back>
-            <Link style={{color: "inherit", textDecoration: "none"}} to="/">
-              <BackText>Back</BackText>
-            </Link>
-          </Back>
-          <h1>{post.frontmatter.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        </IntroPaper>
-      </IntroContainer>
-    </Layout>
+    <>
+      <Layout>
+        <IntroContainer>
+          <IntroPaper>
+            <Back>
+              <Link style={{color: "inherit", textDecoration: "none"}} to="/">
+                <BackText>Back</BackText>
+              </Link>
+            </Back>
+            <h1>{post.frontmatter.title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          </IntroPaper>
+        </IntroContainer>
+        <Disqus disqusConfig={disqusConfig}/>
+      </Layout>
+      <Footer/>
+    </>
   )
 }
 
 export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      id
       html
       frontmatter {
         title
