@@ -2,7 +2,6 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import Disqus from "../components/comment"
-import Footer from "../components/footer"
 import Layout from "../components/layout"
 
 const IntroPaper = styled.div`
@@ -52,8 +51,6 @@ const BackText = styled.h3`
   color: white;
 `
 
-
-
 export default ({ data, pageContext }) => {
   const post = data.markdownRemark
   const title = post.frontmatter.title
@@ -78,7 +75,6 @@ export default ({ data, pageContext }) => {
         </IntroContainer>
         <Disqus disqusConfig={disqusConfig}/>
       </Layout>
-      <Footer/>
     </>
   )
 }

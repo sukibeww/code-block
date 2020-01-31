@@ -2,6 +2,7 @@ import { graphql, Link, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
+import Footer from "./footer";
 
 const Content = styled.div`
   padding: 1.45rem 5vh;
@@ -133,6 +134,7 @@ const Layout = ({ children }) => {
           </PostsWrapper>
         </PostContainer>
       </Content>
+      <Footer/>
     </>
   )
 }
