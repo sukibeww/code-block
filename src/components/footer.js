@@ -27,6 +27,9 @@ const FooterContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
+  @media (max-width: 425px){
+    flex-direction: column-reverse;
+  }
 `
 
 const FooterIntroWrapper = styled.div`
@@ -37,6 +40,9 @@ const FooterIntroWrapper = styled.div`
   text-align: left;
   max-width: 40vw;
   margin: 0 3vw;
+  @media (max-width: 425px){
+    max-width: 95%;
+  }
 `
 
 const FooterLinksWrapper = styled.div`
@@ -63,24 +69,23 @@ const Footer = ({ children }) => {
       <StyledFooter>
         <FooterContentWrapper>
           <FooterIntroWrapper>
-            <h1 style={{color: "white", textDecoration: "underline", fontSize: "1.4em"}}>About me</h1>
-            <h4 style={{color: "white"}}>I am an Indonesian developer based in Melbourne, I love coding and experiment with design. I am currently invested in React, GraphQL and testing. I created this blog to teach myself server-side rendering  and search engine optimisation process, while trying to give blogging a shot at the same time. This is the first blog that I ever created pardon my bad writing... hahahah</h4>
+            <h1 style={{color: "white", textDecoration: "underline", fontSize: "1.4em", margin: "5px 0"}}>About me</h1>
+            <h4 style={{color: "white", margin: 0}}>I am an Indonesian developer based in Melbourne, I love coding and experiment with design. I am currently invested in React, GraphQL and testing. I created this blog to teach myself server-side rendering  and search engine optimisation process, while trying to give blogging a shot at the same time. This is the first blog that I ever created pardon my bad writing... hahahah</h4>
           </FooterIntroWrapper>
           <FooterLinksWrapper>
-            <h1 style={{color: "white", textDecoration: "underline" , marginBottom: "0", fontSize: "1.4em"}}>Find me on:</h1>
-            <a href="https://github.com/sukibeww">
+            <a href="https://github.com/sukibeww" style={{color: "white"}}>
               <LinkContainer>
                 <FaGithub size="2.3em"/>
                 <h4 style={{color: "white", margin: 0, width: "100%"}}>Github</h4>
               </LinkContainer>
             </a>
-            <a href="https://twitter.com/suki_aliong">
+            <a href="https://twitter.com/suki_aliong" style={{color: "white"}}>
               <LinkContainer>
                 <FaTwitter size="2.3em"/>
                 <h4 style={{color: "white", margin: 0, width: "100%"}}>Twitter</h4>
               </LinkContainer>
             </a>
-            <a href="https://www.instagram.com/sukialiong/">
+            <a href="https://www.instagram.com/sukialiong/" style={{color: "white"}}>
               <LinkContainer>
                 <FaInstagram size="2.3em"/>
                 <h4 style={{color: "white", margin: 0, width: "100%"}}>Instagram</h4>

@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
+import { IoIosArrowBack } from "react-icons/io"
 import styled from "styled-components"
 import Disqus from "../components/comment"
 import Layout from "../components/layout"
@@ -35,20 +36,14 @@ const IntroContainer = styled.div`
 `
 
 const Back = styled.div`
-  background-color: #5F3AFF;
-  color: white;
   align-self: flex-start;
   margin: 5px;
-  background-position: center;
-  /* transition: background 0.3s; */
-  :hover{
-    background: #6c4bfc radial-gradient(circle, transparent 1%, #6c4bfc 1%) center/15000%;
-  }
+  height: 0; 
+  overflow: visible;
 `
 
 const BackText = styled.h3`
   margin: 5px;
-  color: white;
 `
 
 export default ({ data, pageContext }) => {
@@ -66,7 +61,7 @@ export default ({ data, pageContext }) => {
           <IntroPaper>
             <Back>
               <Link style={{color: "inherit", textDecoration: "none"}} to="/">
-                <BackText>Back</BackText>
+                <BackText><IoIosArrowBack/></BackText>
               </Link>
             </Back>
             <h1>{post.frontmatter.title}</h1>

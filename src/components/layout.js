@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import Footer from "./footer";
+import Header from "./header";
 
 const Content = styled.div`
   padding: 1.45rem 5vh;
@@ -46,7 +47,7 @@ const PostContainer = styled.div`
   align-items: flex-start;
   padding: 5vh 0;
   max-width: 25%;
-  height: 100%;
+  /* height: 100%; */
   position: static;
   @media (max-width: 425px){
     max-width: 100%;
@@ -59,8 +60,8 @@ const PostsWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 80vh;
-  overflow-x: hidden;
+  /* height: 80vh; */
+  /* overflow-x: hidden; */
   @media (max-width: 425px){
     max-width: 100%;
     height: auto;
@@ -113,6 +114,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Header/>
       <Content> 
         <StyledMain>{children}</StyledMain>
         <PostContainer>

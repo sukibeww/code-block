@@ -1,5 +1,6 @@
 import { graphql } from "gatsby"
 import React from "react"
+import { AiOutlineBlock } from "react-icons/ai"
 import styled from 'styled-components'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -16,6 +17,9 @@ const MainHeader = styled.h1`
   margin-top: 20px;
   text-align: center;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 
@@ -56,7 +60,8 @@ export default ({data}) => {
     <SEO title="Home" />
     <IntroContainer>
       <IntroPaper>
-        <MainHeader>Suki's Blog</MainHeader>
+        
+        <MainHeader>CodeBlock <AiOutlineBlock/> </MainHeader>
         <Subheader>{data.site.siteMetadata.introduction}</Subheader>
         <Subheader>{data.site.siteMetadata.description}</Subheader>
       </IntroPaper>
