@@ -120,9 +120,9 @@ const Layout = ({ children }) => {
         <PostContainer>
           <PostCount>{data.allMarkdownRemark.totalCount} Posts</PostCount>
           <PostsWrapper>
-            {data.allMarkdownRemark.edges.map(({ node }) => (
+            {data.allMarkdownRemark.edges.map(({ node }, index) => (
               <PostPaper key={node.id}>
-                <Link to={`/blog/${node.fields.slug}`} style={{color: "#373737"}}>
+                <Link to={`/blog/${data.allMarkdownRemark.totalCount - index}`} style={{color: "#373737"}}>
                   <h3>
                     {node.frontmatter.title}{" "}
                     <span>

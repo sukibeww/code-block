@@ -17,11 +17,10 @@ const PaginationOption = styled.h4`
 
 const Pagination = (props) => {
   const { currentPage, numPages } = props.pageContext
-  const index = Number(currentPage.split("/")[1])
-  const isFirst = index === 1
-  const isLast = index === numPages
-  const prevPage = index - 1 === 1 ? "1" : (index - 1).toString()
-  const nextPage = (index + 1).toString()
+  const isFirst = currentPage === 1
+  const isLast = currentPage === numPages
+  const prevPage = currentPage - 1 === 1 ? "1" : (currentPage - 1).toString()
+  const nextPage = (currentPage + 1).toString()
   return (
     <>
       <PaginationContainer>
@@ -39,25 +38,5 @@ const Pagination = (props) => {
     </>
   )
 }
-
-// export const pageQuery = graphql`
-//   query blogPageQuery($skip: Int!, $limit: Int!) {
-//     allMarkdownRemark(
-//       sort: { fields: [frontmatter___date], order: DESC }
-//       limit: $limit
-//       skip: $skip
-//     ) {
-//       edges {
-//         node {
-//           excerpt
-//           frontmatter {
-//             date(formatString: "DD MMMM, YYYY")
-//             title
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export default Pagination
