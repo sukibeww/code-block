@@ -122,7 +122,7 @@ const Layout = ({ children }) => {
           <PostsWrapper>
             {data.allMarkdownRemark.edges.map(({ node }) => (
               <PostPaper key={node.id}>
-                <Link to={node.fields.slug} style={{color: "#373737"}}>
+                <Link to={`/blog/${node.fields.slug}`} style={{color: "#373737"}}>
                   <h3>
                     {node.frontmatter.title}{" "}
                     <span>

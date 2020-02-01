@@ -4,6 +4,7 @@ import { IoIosArrowBack } from "react-icons/io"
 import styled from "styled-components"
 import Disqus from "../components/comment"
 import Layout from "../components/layout"
+import Pagination from "../components/pagination"
 
 const IntroPaper = styled.div`
   background-color: #FFFFFF;
@@ -38,12 +39,14 @@ const IntroContainer = styled.div`
 const Back = styled.div`
   align-self: flex-start;
   margin: 5px;
-  height: 0; 
-  overflow: visible;
 `
 
 const BackText = styled.h3`
   margin: 5px;
+`
+
+const PostTitle = styled.h1`
+  text-align: center;
 `
 
 export default ({ data, pageContext }) => {
@@ -64,10 +67,11 @@ export default ({ data, pageContext }) => {
                 <BackText><IoIosArrowBack/></BackText>
               </Link>
             </Back>
-            <h1>{post.frontmatter.title}</h1>
+            <PostTitle>{post.frontmatter.title}</PostTitle>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
           </IntroPaper>
         </IntroContainer>
+        <Pagination pageContext={pageContext}/>
         <Disqus disqusConfig={disqusConfig}/>
       </Layout>
     </>
