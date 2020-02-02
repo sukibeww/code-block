@@ -1,4 +1,5 @@
 import { graphql } from "gatsby"
+import Img from "gatsby-image"
 import React from "react"
 import { AiOutlineBlock } from "react-icons/ai"
 import styled from 'styled-components'
@@ -33,11 +34,10 @@ const IntroPaper = styled.div`
   padding: 20px;
   margin: 10px;
   width: 60%;
-  transform: translate3d(10px, 10px, 0) skew(1deg, 1deg);
+  transform: translate3d(10px, 10px, 0);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   text-align: justify;
-  @media (max-width: 425px){
-    transform: skew(0deg, 0deg);
+  @media (max-width: 1200px){
     padding: 20px;
     margin: 0;
     width: 100%;
@@ -54,19 +54,23 @@ const IntroContainer = styled.div`
 `
 
 export default ({data}) => {
-  console.log(data)
+  console.log(data.file.childImageSharp.fluid.src)
   return(
-  <Layout>
-    <SEO title="Home" />
-    <IntroContainer>
-      <IntroPaper>
-        
-        <MainHeader>CodeBlock <AiOutlineBlock/> </MainHeader>
-        <Subheader>{data.site.siteMetadata.introduction}</Subheader>
-        <Subheader>{data.site.siteMetadata.description}</Subheader>
-      </IntroPaper>
-    </IntroContainer>
-  </Layout>
+    <>
+      <Layout>
+        <SEO title="Home" />
+        <IntroContainer>
+          <IntroPaper>
+            <MainHeader>Welcome to {data.site.siteMetadata.title} <AiOutlineBlock/> </MainHeader>
+            <div style={{width: "80%"}}>
+              <Img fluid={data.file.childImageSharp.fluid}  alt="landing" />
+            </div>
+            <Subheader>{data.site.siteMetadata.introduction}</Subheader>
+            <Subheader>{data.site.siteMetadata.description}</Subheader>
+          </IntroPaper>
+        </IntroContainer>
+      </Layout>
+    </>
   )
   
 }
@@ -78,6 +82,17 @@ export const query = graphql`
         title
         description
         introduction
+      }
+    }
+    file(relativePath: {eq: "images/landing.png"}) {
+      childImageSharp {
+        fluid (maxWidth: 400, quality: 100) {
+          base64
+          src
+          srcSet
+          aspectRatio
+          sizes
+        }
       }
     }
   }

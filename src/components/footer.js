@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import styled from "styled-components";
 
 const StyledFooter = styled.footer`
@@ -27,7 +27,7 @@ const FooterContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  @media (max-width: 425px){
+  @media (max-width: 1200px){
     flex-direction: column-reverse;
   }
 `
@@ -40,7 +40,7 @@ const FooterIntroWrapper = styled.div`
   text-align: left;
   max-width: 40vw;
   margin: 0 3vw;
-  @media (max-width: 425px){
+  @media (max-width: 1200px){
     max-width: 95%;
   }
 `
@@ -52,6 +52,12 @@ const FooterLinksWrapper = styled.div`
   justify-content: flex-start;
   max-width: 40vw;
   margin: 0 3vw;
+  @media (max-width: 1200px){
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 100%;
+    width: 100%;
+  }
 `
 
 const LinkContainer = styled.div`
@@ -79,19 +85,18 @@ const Footer = ({ children }) => {
                 <h4 style={{color: "white", margin: 0, width: "100%"}}>Github</h4>
               </LinkContainer>
             </a>
+            <a href="https://www.linkedin.com/in/sukianto-suteja-85b379154/" style={{color: "white"}}>
+              <LinkContainer>
+                <FaLinkedin size="2.3em"/>
+                <h4 style={{color: "white", margin: 0, width: "100%"}}>LinkedIn</h4>
+              </LinkContainer>
+            </a>
             <a href="https://twitter.com/suki_aliong" style={{color: "white"}}>
               <LinkContainer>
                 <FaTwitter size="2.3em"/>
                 <h4 style={{color: "white", margin: 0, width: "100%"}}>Twitter</h4>
               </LinkContainer>
             </a>
-            <a href="https://www.instagram.com/sukialiong/" style={{color: "white"}}>
-              <LinkContainer>
-                <FaInstagram size="2.3em"/>
-                <h4 style={{color: "white", margin: 0, width: "100%"}}>Instagram</h4>
-              </LinkContainer>
-            </a>
-            
           </FooterLinksWrapper>
         </FooterContentWrapper>
         <Links>

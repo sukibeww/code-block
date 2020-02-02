@@ -12,13 +12,14 @@ const Content = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
   align-items: flex-start;
   padding: 5vw;
   background: repeating-linear-gradient(199deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(78deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(277deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(18deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(91deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(348deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(334deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(261deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(21deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),linear-gradient(90deg, hsl(83,0%,100%),hsl(83,0%,100%));
-  @media (max-width: 425px){
+  @media (max-width: 1200px){
     flex-direction: column;
+    align-items: center;
   }
 `
 
@@ -34,10 +35,6 @@ const PostExcerpt = styled.p`
 
 const PostCount = styled.h4`
   align-self: flex-end;
-  transform: skew(-3deg, -3deg);
-  @media (max-width: 425px){
-    transform: skew(0deg, 0deg);
-  }
 `
 
 const PostContainer = styled.div`
@@ -49,7 +46,7 @@ const PostContainer = styled.div`
   max-width: 25%;
   /* height: 100%; */
   position: static;
-  @media (max-width: 425px){
+  @media (max-width: 1200px){
     max-width: 100%;
     height: auto;
   }
@@ -62,7 +59,7 @@ const PostsWrapper = styled.div`
   align-items: flex-start;
   /* height: 80vh; */
   /* overflow-x: hidden; */
-  @media (max-width: 425px){
+  @media (max-width: 1200px){
     max-width: 100%;
     height: auto;
   }
@@ -76,16 +73,9 @@ const PostPaper = styled.div`
   margin: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  transform: skew(-3deg, -3deg);
   :hover {
-    transform: translate3d(5px, 5px, 0) skew(-3deg, -3deg);
+    transform: translate3d(5px, 5px, 0);
     box-shadow: 0 5px 5px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
-  }
-  @media (max-width: 425px){
-    transform: skew(0deg, 0deg);
-    :hover {
-      transform: none;
-    }
   }
 `
 
@@ -94,27 +84,32 @@ const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      totalCount
-      edges {
-        node {
-          id
-          excerpt
-          frontmatter{
-            date(formatString: "DD MMMM, YYYY")
-            title
-          }
-          fields{
-            slug
+        totalCount
+        edges {
+          node {
+            id
+            excerpt
+            frontmatter{
+              date(formatString: "DD MMMM, YYYY")
+              title
+            }
+            fields{
+              slug
+            }
           }
         }
       }
-    }
+      site {
+        siteMetadata {
+          title
+        }
+      } 
     }
   `)
 
   return (
     <>
-      <Header/>
+      <Header siteTitle={data.site.siteMetadata.title}/>
       <Content> 
         <StyledMain>{children}</StyledMain>
         <PostContainer>

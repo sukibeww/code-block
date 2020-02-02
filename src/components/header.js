@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
 import { AiOutlineBlock } from "react-icons/ai";
@@ -21,7 +22,9 @@ const Title = styled.h1`
 
 const Header = ({ siteTitle }) => (
   <StyledHeader>
-    <Title>CodeBlock<AiOutlineBlock/></Title>
+    <Link to="/">
+      <Title>{siteTitle}<AiOutlineBlock/></Title>
+    </Link>
   </StyledHeader>
 )
 
