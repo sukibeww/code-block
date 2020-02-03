@@ -1,6 +1,6 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "./footer";
 import Header from "./header";
@@ -79,11 +79,12 @@ const PostPaper = styled.div`
   }
 `
 
-
 const Layout = ({ children }) => {
+  const pageLimit = 4; 
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    query SiteTitleQuery{
+      allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }){
         totalCount
         edges {
           node {
@@ -107,6 +108,36 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const paginate = Math.ceil(data.allMarkdownRemark.totalCount / pageLimit) - 1 
+  const [ currentPaginate, setCurrentPaginate ] = useState(0)
+  const [ displayedPosts, setDisplayedPost ] = useState(data.allMarkdownRemark.edges.slice(0,pageLimit))
+
+  useEffect(() => {
+    updatePostList(pageLimit)
+  },
+    [currentPaginate],
+  );
+
+  const nextPaginate = async () => {
+    setCurrentPaginate((prevState)=>{
+      return prevState + 1 
+    })
+  }
+
+  const prevPaginate = async () => {
+    setCurrentPaginate((prevState) => {
+      return prevState - 1
+    })
+  }
+
+  const updatePostList = (pageLimit) => {
+    const start = pageLimit * currentPaginate
+    const last = pageLimit * currentPaginate + pageLimit
+    setDisplayedPost(() => {
+      return data.allMarkdownRemark.edges.slice(start, last)
+    })
+  }
+
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title}/>
@@ -115,7 +146,7 @@ const Layout = ({ children }) => {
         <PostContainer>
           <PostCount>{data.allMarkdownRemark.totalCount} Posts</PostCount>
           <PostsWrapper>
-            {data.allMarkdownRemark.edges.map(({ node }, index) => (
+            {displayedPosts.map(({ node }, index) => (
               <PostPaper key={node.id}>
                 <Link to={`/blog/${data.allMarkdownRemark.totalCount - index}`} style={{color: "#373737"}}>
                   <h3>
@@ -129,6 +160,8 @@ const Layout = ({ children }) => {
               </PostPaper>
             ))}
           </PostsWrapper>
+          {(currentPaginate < paginate) && <button onClick={nextPaginate}>Older post...</button>}
+          {(currentPaginate > 0) && <button onClick={prevPaginate}>Newer post...</button>}
         </PostContainer>
       </Content>
       <Footer/>
