@@ -34,7 +34,6 @@ const IntroPaper = styled.div`
   padding: 20px;
   margin: 10px;
   width: 60%;
-  transform: translate3d(10px, 10px, 0);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   text-align: justify;
   @media (max-width: 1200px){

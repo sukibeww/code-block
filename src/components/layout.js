@@ -6,7 +6,6 @@ import Footer from "./footer";
 import Header from "./header";
 
 const Content = styled.div`
-  padding: 1.45rem 5vh;
   min-height: 95vh;
   width: 100%;
   background-size: cover;
@@ -15,7 +14,7 @@ const Content = styled.div`
   justify-content: flex-start;
   flex-direction: row;
   align-items: flex-start;
-  padding: 5vw;
+  padding: 3vw;
   background: repeating-linear-gradient(199deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(78deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(277deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(18deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(91deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(348deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(334deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(261deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),repeating-linear-gradient(21deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,transparent 1px, transparent 31px,rgba(0,0,0,0.03) 31px, rgba(0,0,0,0.03) 32px,transparent 32px, transparent 92px),linear-gradient(90deg, hsl(83,0%,100%),hsl(83,0%,100%));
   @media (max-width: 1200px){
     flex-direction: column;
@@ -44,7 +43,6 @@ const PostContainer = styled.div`
   align-items: flex-start;
   padding: 5vh 0;
   max-width: 25%;
-  /* height: 100%; */
   position: static;
   @media (max-width: 1200px){
     max-width: 100%;
@@ -57,8 +55,6 @@ const PostsWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  /* height: 80vh; */
-  /* overflow-x: hidden; */
   @media (max-width: 1200px){
     max-width: 100%;
     height: auto;
@@ -79,8 +75,21 @@ const PostPaper = styled.div`
   }
 `
 
+const PaginationButton = styled.button`
+  align-self: flex-start;
+`
+
+const PaginationWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+`
+
+
 const Layout = ({ children }) => {
-  const pageLimit = 4; 
+  const pageLimit = 3; 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery{
       allMarkdownRemark(
@@ -112,10 +121,18 @@ const Layout = ({ children }) => {
   const [ currentPaginate, setCurrentPaginate ] = useState(0)
   const [ displayedPosts, setDisplayedPost ] = useState(data.allMarkdownRemark.edges.slice(0,pageLimit))
 
+  const updatePostList = (pageLimit) => {
+    const start = pageLimit * currentPaginate
+    const last = pageLimit * currentPaginate + pageLimit
+    setDisplayedPost(() => {
+      return data.allMarkdownRemark.edges.slice(start, last)
+    })
+  }
+
   useEffect(() => {
     updatePostList(pageLimit)
   },
-    [currentPaginate],
+    [currentPaginate, updatePostList],
   );
 
   const nextPaginate = async () => {
@@ -130,13 +147,7 @@ const Layout = ({ children }) => {
     })
   }
 
-  const updatePostList = (pageLimit) => {
-    const start = pageLimit * currentPaginate
-    const last = pageLimit * currentPaginate + pageLimit
-    setDisplayedPost(() => {
-      return data.allMarkdownRemark.edges.slice(start, last)
-    })
-  }
+  
 
   return (
     <>
@@ -160,8 +171,11 @@ const Layout = ({ children }) => {
               </PostPaper>
             ))}
           </PostsWrapper>
-          {(currentPaginate < paginate) && <button onClick={nextPaginate}>Older post...</button>}
-          {(currentPaginate > 0) && <button onClick={prevPaginate}>Newer post...</button>}
+          <PaginationWrapper>
+            {(currentPaginate < paginate) ? <PaginationButton onClick={nextPaginate}>Older post...</PaginationButton> : <p></p>}
+            {(currentPaginate > 0) ? <PaginationButton onClick={prevPaginate}>Newer post...</PaginationButton> : <p></p>}
+          </PaginationWrapper>
+          
         </PostContainer>
       </Content>
       <Footer/>

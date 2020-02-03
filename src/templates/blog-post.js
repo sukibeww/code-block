@@ -15,13 +15,11 @@ const IntroPaper = styled.div`
   align-self: center;
   padding: 30px;
   margin: 10px;
-  transform: translate3d(10px, 10px, 0);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   text-align: justify;
   width: 75%;
   @media (max-width: 1200px){
-    transform: skew(0deg, 0deg);
-    margin: 0;
+    /* margin: 0; */
     width: 100%;
   }
 `
@@ -32,7 +30,6 @@ const IntroContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
 `
 
 const Back = styled.div`
@@ -57,23 +54,21 @@ export default ({ data, pageContext }) => {
     config: { identifier: slug, title },
   }
   return (
-    <>
-      <Layout>
-        <IntroContainer>
-          <IntroPaper>
-            <Back>
-              <Link style={{color: "inherit", textDecoration: "none"}} to="/">
-                <BackText><IoIosArrowBack/></BackText>
-              </Link>
-            </Back>
-            <PostTitle>{post.frontmatter.title}</PostTitle>
-            <div dangerouslySetInnerHTML={{ __html: post.html }} />
-          </IntroPaper>
-        </IntroContainer>
-        <Pagination pageContext={pageContext}/>
-        <Disqus disqusConfig={disqusConfig}/>
-      </Layout>
-    </>
+    <Layout>
+      <IntroContainer>
+        <IntroPaper>
+          <Back>
+            <Link style={{color: "inherit", textDecoration: "none"}} to="/">
+              <BackText><IoIosArrowBack/></BackText>
+            </Link>
+          </Back>
+          <PostTitle>{post.frontmatter.title}</PostTitle>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        </IntroPaper>
+      </IntroContainer>
+      <Pagination pageContext={pageContext}/>
+      <Disqus disqusConfig={disqusConfig}/>
+    </Layout>
   )
 }
 
