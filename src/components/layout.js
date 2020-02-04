@@ -121,18 +121,17 @@ const Layout = ({ children }) => {
   const [ currentPaginate, setCurrentPaginate ] = useState(0)
   const [ displayedPosts, setDisplayedPost ] = useState(data.allMarkdownRemark.edges.slice(0,pageLimit))
 
-  const updatePostList = (pageLimit) => {
-    const start = pageLimit * currentPaginate
-    const last = pageLimit * currentPaginate + pageLimit
-    setDisplayedPost(() => {
-      return data.allMarkdownRemark.edges.slice(start, last)
-    })
-  }
-
   useEffect(() => {
+    const updatePostList = (pageLimit) => {
+      const start = pageLimit * currentPaginate
+      const last = pageLimit * currentPaginate + pageLimit
+      setDisplayedPost(() => {
+        return data.allMarkdownRemark.edges.slice(start, last)
+      })
+    }
     updatePostList(pageLimit)
   },
-    [currentPaginate, updatePostList],
+    [currentPaginate, data.allMarkdownRemark.edges],
   );
 
   const nextPaginate = async () => {

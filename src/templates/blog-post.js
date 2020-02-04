@@ -5,6 +5,7 @@ import styled from "styled-components"
 import Disqus from "../components/comment"
 import Layout from "../components/layout"
 import Pagination from "../components/pagination"
+import SEO from "../components/seo"
 
 const IntroPaper = styled.div`
   background-color: #FFFFFF;
@@ -19,7 +20,6 @@ const IntroPaper = styled.div`
   text-align: justify;
   width: 75%;
   @media (max-width: 1200px){
-    /* margin: 0; */
     width: 100%;
   }
 `
@@ -55,6 +55,7 @@ export default ({ data, pageContext }) => {
   }
   return (
     <Layout>
+      <SEO title={data.markdownRemark.frontmatter.title}/> 
       <IntroContainer>
         <IntroPaper>
           <Back>
