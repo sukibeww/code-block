@@ -53,7 +53,6 @@ const IntroContainer = styled.div`
 `
 
 export default ({data}) => {
-  console.log(data.file.childImageSharp.fluid.src)
   return(
     <>
       <Layout>

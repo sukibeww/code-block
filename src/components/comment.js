@@ -9,7 +9,6 @@ const CommentWrapper = styled.div`
 `
 
 export default (props) => {
-  console.log(process.env.GATSBY_DISQUS_NAME)
   return (
     <CommentWrapper>
       <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={props.disqusConfig} />
