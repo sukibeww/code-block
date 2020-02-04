@@ -76,7 +76,16 @@ const PostPaper = styled.div`
 `
 
 const PaginationButton = styled.button`
+  opacity: 0.5;
+  background-color: white;
   align-self: flex-start;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+  :hover {
+    opacity: 1;
+  }
 `
 
 const PaginationWrapper = styled.div`

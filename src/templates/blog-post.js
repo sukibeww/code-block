@@ -45,6 +45,14 @@ const PostTitle = styled.h1`
   text-align: center;
 `
 
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+`
+
 export default ({ data, pageContext }) => {
   const post = data.markdownRemark
   const title = post.frontmatter.title
@@ -64,7 +72,7 @@ export default ({ data, pageContext }) => {
             </Link>
           </Back>
           <PostTitle>{post.frontmatter.title}</PostTitle>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <Content dangerouslySetInnerHTML={{ __html: post.html }} />
         </IntroPaper>
       </IntroContainer>
       <Pagination pageContext={pageContext}/>
