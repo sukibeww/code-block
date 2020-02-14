@@ -4,7 +4,7 @@ date: "2020-02-14"
 ---
 
 
-![react-native-banner](https://www.inovex.de/blog/wp-content/uploads/2018/03/react-native.png)
+![react-native-banner](https://hackernoon.com/drafts/ro2832a9.png)
 
 
 ## Intro
