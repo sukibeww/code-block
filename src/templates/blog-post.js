@@ -51,6 +51,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   width: auto;
+  max-width: 100%;
 `
 
 export default ({ data, pageContext }) => {
