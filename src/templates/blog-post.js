@@ -52,6 +52,11 @@ const Content = styled.div`
   align-items: center;
   width: auto;
   max-width: 100%;
+  pre {
+    max-width: 90vw;
+    align-self: flex-start;
+    overflow: scroll;
+  }
 `
 
 export default ({ data, pageContext }) => {
