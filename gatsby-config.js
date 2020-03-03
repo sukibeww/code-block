@@ -92,12 +92,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Code:Block - Suki's personal blog`,
+        short_name: `Code:Block`,
         start_url: `/`,
         background_color: `#282828`,
         theme_color: `#282828`,
-        display: `minimal-ui`,
+        display: `standalone`,
         icon: `src/images/codeblock-icon.png`, // This path is relative to the root of the site.
       },
     },
@@ -109,8 +109,13 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/`, `/blog/*`, `/404`,],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }
