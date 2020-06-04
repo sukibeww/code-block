@@ -8,7 +8,7 @@ import Pagination from "../components/pagination"
 import SEO from "../components/seo"
 
 const IntroPaper = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,10 +16,10 @@ const IntroPaper = styled.div`
   align-self: center;
   padding: 30px;
   margin: 10px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   text-align: justify;
   width: 75%;
-  @media (max-width: 1200px){
+  @media (max-width: 1200px) {
     width: 100%;
   }
 `
@@ -52,10 +52,13 @@ const Content = styled.div`
   align-items: center;
   width: auto;
   max-width: 100%;
+  .gatsby-highlight {
+    width: 90%;
+  }
   pre {
-    max-width: 90vw;
-    align-self: flex-start;
-    overflow: scroll;
+    max-width: 100%;
+    align-self: center;
+    overflow-x: scroll;
   }
 `
 
@@ -69,20 +72,22 @@ export default ({ data, pageContext }) => {
   }
   return (
     <Layout>
-      <SEO title={data.markdownRemark.frontmatter.title}/> 
+      <SEO title={data.markdownRemark.frontmatter.title} />
       <IntroContainer>
         <IntroPaper>
           <Back>
-            <Link style={{color: "inherit", textDecoration: "none"}} to="/">
-              <BackText><IoIosArrowBack/></BackText>
+            <Link style={{ color: "inherit", textDecoration: "none" }} to="/">
+              <BackText>
+                <IoIosArrowBack />
+              </BackText>
             </Link>
           </Back>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <Content dangerouslySetInnerHTML={{ __html: post.html }} />
         </IntroPaper>
       </IntroContainer>
-      <Pagination pageContext={pageContext}/>
-      <Disqus disqusConfig={disqusConfig}/>
+      <Pagination pageContext={pageContext} />
+      <Disqus disqusConfig={disqusConfig} />
     </Layout>
   )
 }

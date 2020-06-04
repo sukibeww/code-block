@@ -9,11 +9,11 @@ date: "2020-02-14"
 
 ## Intro
 
-In this post I want to share my personal experience of learning React Native as a developer with working understanding of React. I want to address the barrier that I have to go through and the lesson that I have learned by learning React Native. I will points out the shared concept of React and React Native that I have noticed throughout my learning process. 
+In this post I want to share my personal experience of learning React Native as a developer with working understanding of React. I want to address the barrier that I have to go through and the lesson that I have learned by learning React Native. I will points out the shared concept of React and React Native that I have noticed throughout my learning process.
 
-## Disclaimer 
+## Disclaimer
 
-I haven't considered myself as an expert in React Native nor React, please let me know if you spot anything wrong with this article. (I'll fix it posthaste!) 😁. 
+I haven't considered myself as an expert in React Native nor React, please let me know if you spot anything wrong with this article. (I'll fix it posthaste!) 😁.
 
 ## Resources 
 These are some of the resources that I really like and used to learn React Native in sequence: 
