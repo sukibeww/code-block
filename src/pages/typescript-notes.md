@@ -1,5 +1,5 @@
 ---
-title: "My personal notes while learning Typescript"
+title: "My personal notes on Typescript"
 date: "2020-06-03"
 ---
 
@@ -97,7 +97,7 @@ const randomArray2: (string | number | null | boolean)[] = [
   false,
   10,
   true,
-  "Heyaa"
+  "Heyaa",
 ] //Explicitly typed.
 ```
 
@@ -119,11 +119,11 @@ console.log(x) //Heyaa
 `any` is a dynamic type that basically eliminate all of the "statically typed aspect" of TypeScript, it is a bit of a double-edge sword. I like to think of it as a temporary solution if there is a situation where I don't know what a function does and change it to its actual type once I understand it. Using `any` kinda removes all of the benefit of using TypeScript, because it will lose all of TypeScript's type secureness and rollsback into its predecessor JavaScript.
 
 ```typescript
-let x: any;
-x = 10;
-x = "Heyaa";
-x = null;
-x = [1,2,3];
+let x: any
+x = 10
+x = "Heyaa"
+x = null
+x = [1, 2, 3]
 // none of this will throw an error message just like how JavaScript will behave.
 ```
 
@@ -133,17 +133,43 @@ Function in TypeScript is a bit more powerful compared to what it was in JavaScr
 
 ```typescript
 // parameters and return type is explicitly typed
-const sum = (a: number, b: number) : number => {
-  return a + b;
+const sum = (a: number, b: number): number => {
+  return a + b
 }
 
 // parameters that are not explicitly typed will be inferred to `any` type
-const sum = (a, b) : number => {
-  return a + b;
+const sum = (a, b): number => {
+  return a + b
 }
 
 const sum = (a: number, b: number) => {
-  return a + b; //return type is inferred to `number` type
+  return a + b //return type is inferred to `number` type
+}
+
+// union type also can be used
+const randomFunc = (foo: number, bar: string | number): number | string => {
+  if (typeof bar === string) {
+    return bar
+  } else {
+    return bar
+  }
+}
+```
+
+TypeScript also allows function parameter to be optional and assign a default value for the parameter in scenario where the parameter is not provided.
+
+```typescript
+// "?" indicates that parameter a is optional
+// while the value of 1 is the default value of that parameter and will be assigned if parameter "b" is not provided
+const sum = (a number, b?: number = 1): number => {
+  return a + b
+}
+
+// both of this functionality is completely isolated, optional parameter does not have to have a default value.
+// note that it is the convention to write the required parameter before the optional parameter
+// sum(,10) << to avoid something like this
+const sum = (a: number = 2, b?: number): number => {
+  return a + b
 }
 ```
 
@@ -152,8 +178,8 @@ const sum = (a: number, b: number) => {
 `void` is the polar opposite of `any` type. It basically checks and ensure that it does not fall under any type at all. It is mainly used for a function that does not return value.
 
 ```typescript
-const pleaseIgnoreMe = () : void => {
-  console.log("woop woop");
+const pleaseIgnoreMe = (): void => {
+  console.log("woop woop")
 }
 ```
 
