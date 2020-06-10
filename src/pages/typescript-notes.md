@@ -18,10 +18,11 @@ This is just some of my notes that I will refer back to in the future that I hop
 - Dynamic Type - any
 - Functions
 - Void Type
+- Type Aliases & Function signatures
 
 ## Resources
 
-These are some of TypeScript related resources that I have stumbled into:
+These are some of the best TypeScript related resources that I have stumbled into:
 
 - [Official TypeScript Documentation](https://www.typescriptlang.org/docs/home.html)
 - [TypeScript vs JavaScript - Ben Awad](https://www.youtube.com/watch?v=D6or2gdrHRE)
@@ -29,6 +30,7 @@ These are some of TypeScript related resources that I have stumbled into:
 - [NetNinja Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI)
 - [The object Type in TypeScript by Marius Schulz](https://mariusschulz.com/blog/the-object-type-in-typescript#:~:text=The%20Object%20Type,common%20to%20all%20JavaScript%20objects.)
 - [Types vs Interface](https://github.com/peerigon/eslint-config-peerigon/issues/64)
+- [Cleaner TypeScript with the Non Null Assertion Operator](https://medium.com/better-programming/cleaner-typescript-with-the-non-null-assertion-operator-300789388376)
 
 ## Type Inference
 
@@ -198,4 +200,143 @@ const badFunction = (notImportantModule: () => void){
   const x = callback(); //oopsie meant to be importantModule
   x.importantFunction(); //this will throw an error, but if we used `any` instead of `void` it will not error out.
 }
+```
+
+## Type Aliases & Function Signatures
+
+Type alias is just a type declaration without assigning it to any variable. The purpose of Type Alias is to reduce the amount of code redundancy.
+
+Scenario:
+
+```typescript
+const logStudentName = (student: {
+  name: string
+  age: number
+  homeroom: string
+}): void => {
+  console.log(student.name)
+}
+
+const logStudentAge = (student: {
+  name: string
+  age: number
+  homeroom: string
+}): void => {
+  console.log(student.age)
+}
+
+const logStudentHomeroom = (student: {
+  name: string
+  age: number
+  homeroom: string
+}): void => {
+  console.log(student.homeroom)
+}
+```
+
+Using Type Alias:
+
+```typescript
+type Student = {
+  name: string
+  age: number
+  homeroom: string
+}
+
+const logStudentName = (student: Student): void => {
+  console.log(student.name)
+}
+
+const logStudentAge = (student: Student}): void => {
+  console.log(student.age)
+}
+
+const logStudentHomeroom = (student: Student): void => {
+  console.log(student.homeroom)
+}
+// much cleaner
+```
+
+Type Alias also can contain a function type if it was provided with Function Signatures.
+
+```typescript
+//arrow function represents a Function type
+type voidFunction: () => void
+type parameterFunction: (a: number, b: string) => string
+
+voidFunction = () => {
+  console.log("Heyaa")
+}
+```
+
+## TypeScript interaction with DOM
+
+DOM reference:
+
+```html
+<h1>My day in a park</h1>
+<p>The dog is doing a zoomies in the field with other dogs</p>
+<button class="clickable-button" id="example-save-button-1">Save</button>
+```
+
+In the scenario where we want to query for that particular save button in JavaScript, we write something like this:
+
+```javascript
+//javascript
+const button = document.querySelector("button")
+// will throw a warning message in TypeScript, because it is possibly undefined
+```
+
+Behind this query JavaScript actually does not ensure that it will return an element if the element does not exist in the DOM. This behaviour does not sit well with TypeScript, it will not throw and error but it will fire a warning message that indicates that the query might not return anything. In order to prevent this, we could use Type Casting or Non-null assertion operator ("!").
+
+### Non-null Assertion
+
+Non-null assertion is used when the developer is certain that the query is definitely returns something. Personally, I will try to avoid using Non-null assertion too much because it is just like `any` type and remove the benefits of using TypeScript and seems a bit unelegant to me.
+
+```typescript
+const button = document.querySelector("button") // will throw a warning message
+// exclamation or bang notation represent a non-null assertion.
+const buttonNonNull = document.querySelector("button")! // OK
+// note: button and buttonNonNull data type is inferred as HTMLElementButton because we are querying for button element
+
+const buttonByClass = document.querySelector(".clickable-button")! // inferred to Element
+const buttonById = document.querySelector("#example-save-button-1")! //inferred to Element
+// Element is a just a non-specific type that is viable for both HTML element and XML element.
+```
+
+### Type Casting or Type Assertion
+
+We have been using type casting throughout this notes, which goes something like this:
+
+```typescript
+let num1: number = 1
+let name: string = "Suki"
+
+// I could not find any resources on this syntax, so I am assuming that this is an old syntax because the official documentation uses the first syntax.
+let num2 = <number>2
+let greet = <string>"Heyaa"
+```
+
+There is one more way of doing type casting which uses the `as` syntax.
+
+```typescript
+let num = 1 as number
+let name = "Suki" as string
+```
+
+The `as` syntax is a bit special because it is the only syntax allowed when dealing with JSX.
+
+DOM reference:
+
+```html
+<h1>My day in a park</h1>
+<p>The dog is doing a zoomies in the field with other dogs</p>
+<button class="clickable-button" id="example-save-button-1">Save</button>
+```
+
+```typescript
+// buttonByClass variable can only accept HTMLButtonElement now because we type cast it!
+const buttonByClass = document.querySelector(
+  ".clickable-button"
+) as HTMLButtonElement
 ```

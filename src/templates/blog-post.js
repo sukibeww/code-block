@@ -51,7 +51,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   width: auto;
-  max-width: 100%;
+  max-width: 90%;
   .gatsby-highlight {
     width: 90%;
   }
@@ -59,6 +59,9 @@ const Content = styled.div`
     max-width: 100%;
     align-self: center;
     overflow-x: scroll;
+  }
+  p {
+    text-align: center;
   }
 `
 
