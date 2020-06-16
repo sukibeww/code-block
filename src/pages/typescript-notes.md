@@ -19,6 +19,9 @@ This is just some of my notes that I will refer back to in the future that I hop
 - Functions
 - Void Type
 - Type Aliases & Function signatures
+- TypeScript interaction with DOM
+- Classes
+- Access Modifiers
 
 ## Resources
 
@@ -312,7 +315,7 @@ We have been using type casting throughout this notes, which goes something like
 let num1: number = 1
 let name: string = "Suki"
 
-// I could not find any resources on this syntax, so I am assuming that this is an old syntax because the official documentation uses the first syntax.
+//I am assuming that this is an old syntax because the official documentation uses the first syntax.
 let num2 = <number>2
 let greet = <string>"Heyaa"
 ```
@@ -340,3 +343,122 @@ const buttonByClass = document.querySelector(
   ".clickable-button"
 ) as HTMLButtonElement
 ```
+
+## Classes
+
+The difference between classes in JavaScript and TypeScript is not much, but TypeScript offers some extra feature that is rather powerful.
+
+### Class in JavaScript
+
+```javascript
+class Student {
+  constructor(name, age, homeRoom) {
+    this.name = name
+    this.age = age
+    this.homeRoom = homeRoom
+  }
+
+  getName() {
+    return this.name
+  }
+}
+```
+
+### Class in TypeScript
+
+```typescript
+class Student {
+  //explicitly type the properties
+  name: string
+  age: number
+  homeRoom: string
+
+  // explicitly type the expected parameter
+  constructor(name: string, age: number, homeRoom: string) {
+    this.name = name
+    this.age = age
+    this.homeRoom = homeRoom
+  }
+
+  // explicitly type the return type of the function
+  getName(): string {
+    return this.name
+  }
+}
+```
+
+Just from that example, it is clear to see that we can be very pedantic while defining our classes in TypeScript. Classes can also be used as a data type in TypeScript, in scenario where we want to create an array of students that only contains a student object and no other data type.
+
+```typescript
+let studentList: Student[] = []
+//refer to the Student class above
+const william = new Student("william", "22", "Mrs. Smith")
+const shawn = new Student("shawn", "22", "Mrs. Guten Tag")
+const notStudentObject = {
+  name: "suki",
+  age: "22",
+  homeRoom: "Mr. Mackie",
+}
+studentList.push(william) // OK
+studentList.push(shawn) // OK
+studentList.push(notStudentObject) // will throw an error
+```
+
+Variable `notStudentObject` errors out because it is not a student object, it is just an object that is quite similar to Student object but not directly an instance of the student class.
+
+### Access Modifiers
+
+This concept should be rather familiar if you have written something in Java programming language, in TypeScript we can manipulate the access modifier for class properties with `public`, `private`, and `readonly` modifier.
+
+```typescript
+class Student {
+  // not defining access modifier will default to public
+  public name: string
+  private age: number
+  readonly homeRoom: string
+
+  constructor(name: string, age: number, homeRoom: string) {
+    this.name = name
+    this.age = age
+    this.homeRoom = homeRoom
+  }
+  getName(): string {
+    return this.name
+  }
+  setAge(age: number): void {
+    this.age = age
+  }
+  setHomeRoom(homeroom: string): void {
+    this.homeRoom = homeroom
+  }
+}
+const william = new Student("william", "22", "Mrs. Smith")
+william.age = 24 // will error out because property age is private
+william.setAge(24) // OK
+william.homeRoom = "Mr. Penguin" //will error out because the property is read only
+william.setHomeRoom("Mr. Penguin") //will error out because the property is read only
+```
+
+<strong>Public</strong>: allows property to be accessed and modified.
+
+<strong>Private</strong>: allows property to be modified but not accessible outside of the class.
+
+<strong>Readonly</strong>: allows property to be accessed but prevent modification at any form.
+
+TypeScript also provide an easier way to write constuctor given that we provide all of the access modifier for all of our properties.
+
+```typescript
+class Student {
+  //Note that this will only works if we provide all of the access modifier for all of the properties
+  constructor(
+    public name: string,
+    private age: number,
+    readonly homeRoom: string
+  ) {}
+}
+//very clean :D
+```
+
+    this.name = name
+    this.age = age
+    this.homeRoom = homeRoom
