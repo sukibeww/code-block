@@ -22,6 +22,7 @@ This is just some of my notes that I will refer back to in the future that I hop
 - TypeScript interaction with DOM
 - Classes
 - Access Modifiers
+- Interface
 
 ## Resources
 
@@ -40,23 +41,23 @@ These are some of the best TypeScript related resources that I have stumbled int
 In TypeScript, all of variable that aren't explicitly typed will be inffered a type, kinda how it works in JavaScript with a bit of twist.
 
 ```typescript
-const x = 10 //Inferred into "number" type.
-const y = "Heyaa" //inferred into "String" type.
-const z = null //inferred into "null" type.
-const arrString = ["Heyaa", "Hii", "Hello"] //inferred into (string)[]
+const x = 10; //Inferred into "number" type.
+const y = "Heyaa"; //inferred into "String" type.
+const z = null; //inferred into "null" type.
+const arrString = ["Heyaa", "Hii", "Hello"]; //inferred into (string)[]
 const student = {
   name: "Suki",
   age: 24,
   homeroom: "Mr. Guten Tag",
-}
+};
 // inferred to {name: (string), age: (number), homeroom: (string)}
 ```
 
 Once a variable type is explicitly typed or inferred that variable can only contain that specific type.
 
 ```typescript
-let x = 10 //inferred into "number" type.
-x = "Heyaa" //will not compile.
+let x = 10; //inferred into "number" type.
+x = "Heyaa"; //will not compile.
 ```
 
 The error message looks like something like this:
@@ -94,7 +95,7 @@ Pay attention to the types in the example above, it is "string" not "String". Th
 Array in JavaScript could contain a variety of data with a different types, in TypeScript they tackled this issue with Union Typing.
 
 ```typescript
-const randomArray = [10, "Heyaa", null, true] //inferred into (String|number|null|boolean)[]
+const randomArray = [10, "Heyaa", null, true]; //inferred into (String|number|null|boolean)[]
 const randomArray2: (string | number | null | boolean)[] = [
   1,
   "Hii",
@@ -103,7 +104,7 @@ const randomArray2: (string | number | null | boolean)[] = [
   10,
   true,
   "Heyaa",
-] //Explicitly typed.
+]; //Explicitly typed.
 ```
 
 Union Type use case is not restricted to only arrays, simple variable can also be explicitly type using Union Typing making them a bit more dynamic and able to contain different data types based on the given types.
@@ -111,11 +112,11 @@ Union Type use case is not restricted to only arrays, simple variable can also b
 Simple Variable example:
 
 ```typescript
-let x: string | number
-x = 10
-console.log(x) //10
-x = "Heyaa"
-console.log(x) //Heyaa
+let x: string | number;
+x = 10;
+console.log(x); //10
+x = "Heyaa";
+console.log(x); //Heyaa
 // variable x is assignable with both string and number type data.
 ```
 
@@ -124,11 +125,11 @@ console.log(x) //Heyaa
 `any` is a dynamic type that basically eliminate all of the "statically typed aspect" of TypeScript, it is a bit of a double-edge sword. I like to think of it as a temporary solution if there is a situation where I don't know what a function does and change it to its actual type once I understand it. Using `any` kinda removes all of the benefit of using TypeScript, because it will lose all of TypeScript's type secureness and rollsback into its predecessor JavaScript.
 
 ```typescript
-let x: any
-x = 10
-x = "Heyaa"
-x = null
-x = [1, 2, 3]
+let x: any;
+x = 10;
+x = "Heyaa";
+x = null;
+x = [1, 2, 3];
 // none of this will throw an error message just like how JavaScript will behave.
 ```
 
@@ -139,26 +140,26 @@ Function in TypeScript is a bit more powerful compared to what it was in JavaScr
 ```typescript
 // parameters and return type is explicitly typed
 const sum = (a: number, b: number): number => {
-  return a + b
-}
+  return a + b;
+};
 
 // parameters that are not explicitly typed will be inferred to `any` type
 const sum = (a, b): number => {
-  return a + b
-}
+  return a + b;
+};
 
 const sum = (a: number, b: number) => {
-  return a + b //return type is inferred to `number` type
-}
+  return a + b; //return type is inferred to `number` type
+};
 
 // union type also can be used
 const randomFunc = (foo: number, bar: string | number): number | string => {
   if (typeof bar === string) {
-    return bar
+    return bar;
   } else {
-    return bar
+    return bar;
   }
-}
+};
 ```
 
 TypeScript also allows function parameter to be optional and assign a default value for the parameter in scenario where the parameter is not provided.
@@ -184,8 +185,8 @@ const sum = (a: number = 2, b?: number): number => {
 
 ```typescript
 const pleaseIgnoreMe = (): void => {
-  console.log("woop woop")
-}
+  console.log("woop woop");
+};
 ```
 
 In scenario where the return value of callback are ignored, try to avoid using type `any` and use type `void` instead. `void` is safer than `any` because if we accidentally use the return value that was meant to be ignored it will throw an error, while `any` will not throw an error.
@@ -213,28 +214,28 @@ Scenario:
 
 ```typescript
 const logStudentName = (student: {
-  name: string
-  age: number
-  homeroom: string
+  name: string;
+  age: number;
+  homeroom: string;
 }): void => {
-  console.log(student.name)
-}
+  console.log(student.name);
+};
 
 const logStudentAge = (student: {
-  name: string
-  age: number
-  homeroom: string
+  name: string;
+  age: number;
+  homeroom: string;
 }): void => {
-  console.log(student.age)
-}
+  console.log(student.age);
+};
 
 const logStudentHomeroom = (student: {
-  name: string
-  age: number
-  homeroom: string
+  name: string;
+  age: number;
+  homeroom: string;
 }): void => {
-  console.log(student.homeroom)
-}
+  console.log(student.homeroom);
+};
 ```
 
 Using Type Alias:
@@ -286,7 +287,7 @@ In the scenario where we want to query for that particular save button in JavaSc
 
 ```javascript
 //javascript
-const button = document.querySelector("button")
+const button = document.querySelector("button");
 // will throw a warning message in TypeScript, because it is possibly undefined
 ```
 
@@ -297,13 +298,13 @@ Behind this query JavaScript actually does not ensure that it will return an ele
 Non-null assertion is used when the developer is certain that the query is definitely returns something. Personally, I will try to avoid using Non-null assertion too much because it is just like `any` type and remove the benefits of using TypeScript and seems a bit unelegant to me.
 
 ```typescript
-const button = document.querySelector("button") // will throw a warning message
+const button = document.querySelector("button"); // will throw a warning message
 // exclamation or bang notation represent a non-null assertion.
-const buttonNonNull = document.querySelector("button")! // OK
+const buttonNonNull = document.querySelector("button")!; // OK
 // note: button and buttonNonNull data type is inferred as HTMLElementButton because we are querying for button element
 
-const buttonByClass = document.querySelector(".clickable-button")! // inferred to Element
-const buttonById = document.querySelector("#example-save-button-1")! //inferred to Element
+const buttonByClass = document.querySelector(".clickable-button")!; // inferred to Element
+const buttonById = document.querySelector("#example-save-button-1")!; //inferred to Element
 // Element is a just a non-specific type that is viable for both HTML element and XML element.
 ```
 
@@ -312,19 +313,19 @@ const buttonById = document.querySelector("#example-save-button-1")! //inferred 
 We have been using type casting throughout this notes, which goes something like this:
 
 ```typescript
-let num1: number = 1
-let name: string = "Suki"
+let num1: number = 1;
+let name: string = "Suki";
 
 //I am assuming that this is an old syntax because the official documentation uses the first syntax.
-let num2 = <number>2
-let greet = <string>"Heyaa"
+let num2 = <number>2;
+let greet = <string>"Heyaa";
 ```
 
 There is one more way of doing type casting which uses the `as` syntax.
 
 ```typescript
-let num = 1 as number
-let name = "Suki" as string
+let num = 1 as number;
+let name = "Suki" as string;
 ```
 
 The `as` syntax is a bit special because it is the only syntax allowed when dealing with JSX.
@@ -341,7 +342,7 @@ DOM reference:
 // buttonByClass variable can only accept HTMLButtonElement now because we type cast it!
 const buttonByClass = document.querySelector(
   ".clickable-button"
-) as HTMLButtonElement
+) as HTMLButtonElement;
 ```
 
 ## Classes
@@ -353,13 +354,13 @@ The difference between classes in JavaScript and TypeScript is not much, but Typ
 ```javascript
 class Student {
   constructor(name, age, homeRoom) {
-    this.name = name
-    this.age = age
-    this.homeRoom = homeRoom
+    this.name = name;
+    this.age = age;
+    this.homeRoom = homeRoom;
   }
 
   getName() {
-    return this.name
+    return this.name;
   }
 }
 ```
@@ -369,20 +370,20 @@ class Student {
 ```typescript
 class Student {
   //explicitly type the properties
-  name: string
-  age: number
-  homeRoom: string
+  name: string;
+  age: number;
+  homeRoom: string;
 
   // explicitly type the expected parameter
   constructor(name: string, age: number, homeRoom: string) {
-    this.name = name
-    this.age = age
-    this.homeRoom = homeRoom
+    this.name = name;
+    this.age = age;
+    this.homeRoom = homeRoom;
   }
 
   // explicitly type the return type of the function
   getName(): string {
-    return this.name
+    return this.name;
   }
 }
 ```
@@ -390,18 +391,18 @@ class Student {
 Just from that example, it is clear to see that we can be very pedantic while defining our classes in TypeScript. Classes can also be used as a data type in TypeScript, in scenario where we want to create an array of students that only contains a student object and no other data type.
 
 ```typescript
-let studentList: Student[] = []
+let studentList: Student[] = [];
 //refer to the Student class above
-const william = new Student("william", "22", "Mrs. Smith")
-const shawn = new Student("shawn", "22", "Mrs. Guten Tag")
+const william = new Student("william", "22", "Mrs. Smith");
+const shawn = new Student("shawn", "22", "Mrs. Guten Tag");
 const notStudentObject = {
   name: "suki",
   age: "22",
   homeRoom: "Mr. Mackie",
-}
-studentList.push(william) // OK
-studentList.push(shawn) // OK
-studentList.push(notStudentObject) // will throw an error
+};
+studentList.push(william); // OK
+studentList.push(shawn); // OK
+studentList.push(notStudentObject); // will throw an error
 ```
 
 Variable `notStudentObject` errors out because it is not a student object, it is just an object that is quite similar to Student object but not directly an instance of the student class.
@@ -413,30 +414,30 @@ This concept should be rather familiar if you have written something in Java pro
 ```typescript
 class Student {
   // not defining access modifier will default to public
-  public name: string
-  private age: number
-  readonly homeRoom: string
+  public name: string;
+  private age: number;
+  readonly homeRoom: string;
 
   constructor(name: string, age: number, homeRoom: string) {
-    this.name = name
-    this.age = age
-    this.homeRoom = homeRoom
+    this.name = name;
+    this.age = age;
+    this.homeRoom = homeRoom;
   }
   getName(): string {
-    return this.name
+    return this.name;
   }
   setAge(age: number): void {
-    this.age = age
+    this.age = age;
   }
   setHomeRoom(homeroom: string): void {
-    this.homeRoom = homeroom
+    this.homeRoom = homeroom;
   }
 }
-const william = new Student("william", "22", "Mrs. Smith")
-william.age = 24 // will error out because property age is private
-william.setAge(24) // OK
-william.homeRoom = "Mr. Penguin" //will error out because the property is read only
-william.setHomeRoom("Mr. Penguin") //will error out because the property is read only
+const william = new Student("william", "22", "Mrs. Smith");
+william.age = 24; // will error out because property age is private
+william.setAge(24); // OK
+william.homeRoom = "Mr. Penguin"; //will error out because the property is read only
+william.setHomeRoom("Mr. Penguin"); //will error out because the property is read only
 ```
 
 <strong>Public</strong>: allows property to be accessed and modified.
@@ -459,6 +460,111 @@ class Student {
 //very clean :D
 ```
 
-    this.name = name
-    this.age = age
-    this.homeRoom = homeRoom
+## Interface
+
+Interface is sorta works like a class, it works like a blueprint for an object. Variable that is explicitly type with an interface has to comply to the declared structure of the assigned interface.
+
+```typescript
+//previous Student class turned into interface
+interface Student {
+  name: string;
+  age: number;
+  homeRoom: string;
+  logName(): void;
+  getName(): string;
+  changeAge(age: number): void;
+}
+
+const michael: Student = {
+  // the key variables have to be the same variable as the interface
+  // the sequence of the key-value pairs does not have to be in the same sequence as the interface
+  age: 22,
+  name: "Michael",
+  homeRoom: "Mr.Deliver",
+  logName(): void {
+    console.log(this.name);
+  },
+  getName(): string {
+    return this.name;
+  },
+  // the parameter name is not relevant as long as it is the same type as the declared interface
+  changeAge(newAge: number): void {
+    this.age = newAge;
+  },
+};
+
+console.log(michael.age); //22
+michael.changeAge(12); // does not return anything
+console.log(michael.age); //12
+```
+
+It is also important to note that interface only generates an object that follows its blueprint, that means that if we generate a new object that fulfills all of the requirement of the Student interface it will work.
+
+```typescript
+//refer to Student interface above
+const manuallyTypeMichael = {
+  age: 22,
+  name: "Michael",
+  homeRoom: "Mr.Deliver",
+  logName(): void {
+    console.log(this.name);
+  },
+  getName(): string {
+    return this.name;
+  },
+  changeAge(newAge: number): void {
+    this.age = newAge;
+  },
+};
+
+const suki: Student = {
+  age: 22,
+  name: "Suki",
+  homeRoom: "Mr.Deliver",
+  logName(): void {
+    console.log(this.name);
+  },
+  getName(): string {
+    return this.name;
+  },
+  changeAge(newAge: number): void {
+    this.age = newAge;
+  },
+};
+
+const checkStudent = (student: Student) => {
+  console.log(student.name + " is a Student");
+};
+
+checkStudent(manuallyTypeMichael); // Michael is a student
+checkStudent(suki); //Suki is a student
+```
+
+Just like Class properties, interface properties can also be assigned with access modifier and be optional.
+
+```typescript
+interface Person {
+  readonly name: string; // a const variable is likely to be a readonly, but still depends on the scenario.
+  private age: number;
+  public address?: string;
+  private email?: string;
+}
+```
+
+Interface is not only limited to a JavaScript Object, we can use interface to describe a function!
+
+```typescript
+//this interface describe a structure that takes in two number parameter that will return a string
+//it does not describe what it suppose to do with those parameter as long as it returns a string
+interface twoStringFunc {
+  (x: string, y: string): string;
+}
+const interpolation: twoStringFunc = (
+  firstString: string,
+  secondString: string
+) => {
+  return firstString + secondString;
+};
+
+console.log(interpolation("Heyaa ", "reader")); //Heyaa reader
+```
