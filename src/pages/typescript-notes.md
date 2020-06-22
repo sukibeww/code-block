@@ -568,3 +568,71 @@ const interpolation: twoStringFunc = (
 
 console.log(interpolation("Heyaa ", "reader")); //Heyaa reader
 ```
+
+### Interface with Classes
+
+Interface can also be used with a class, it might seems a bit weird at first but interface just ensures that the class follows the defined structure of the interface. I'll use the Student class again to showcase the interaction betweenn class and interface
+
+```typescript
+interface haveDescribeFunction {
+  describe(): void;
+}
+
+class Student implements haveDescribeFunction {
+  constructor(
+    public name: string,
+    private age: number,
+    readonly homeRoom: string
+  ) {}
+
+  describe() {
+    console.log(`This is ${this.name}`);
+  }
+}
+const suki = new Student("suki", 22, "Mr.Bernard");
+suki.describe(); //This is Suki
+```
+
+What `haveDescribeFunction` does is just matching whether or not describe function exist in its implementation, it does not pay attention to other properties.
+
+```typescript
+interface haveDescribeFunction {
+  describe(): void;
+}
+// typescript will not compile because it does not have a describe function
+class Teacher implements haveDescribeFunction {
+  constructor(public name: string, private age: number) {}
+}
+
+const mrBernard = new Teacher("Bernard", 40);
+```
+
+Interfaces can also be used as a type for assertion, it is a bit less restrictive compared to using a class for type assertion.
+
+```typescript
+class Student implements haveDescribeFunction {
+  constructor(
+    public name: string,
+    private age: number,
+    readonly homeRoom: string
+  ) {}
+
+  describe() {
+    console.log(`This is ${this.name}`);
+  }
+}
+
+class Teacher implements haveDescribeFunction {
+  constructor(public name: string, private age: number) {}
+
+  describe() {
+    console.log(`This is ${this.name}`);
+  }
+}
+
+const mrBernard = new Teacher("Bernard", 40);
+const suki = new Student("suki", 22, "Mr.Bernard");
+const arrayOfDescribable: haveDescribeFunction[] = [];
+arrayOfDescribable.push(mrBernard, suki);
+console.log(arrayOfDescribable); //(2) [Teacher, Student]
+```
