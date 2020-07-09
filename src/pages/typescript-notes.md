@@ -33,7 +33,7 @@ These are some of the best TypeScript related resources that I have stumbled int
 - [Why TypeScript is Actually Good - Ben Awad](https://www.youtube.com/watch?v=Ptrhz2zW--o)
 - [NetNinja Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI)
 - [The object Type in TypeScript by Marius Schulz](https://mariusschulz.com/blog/the-object-type-in-typescript#:~:text=The%20Object%20Type,common%20to%20all%20JavaScript%20objects.)
-- [Types vs Interface](https://github.com/peerigon/eslint-config-peerigon/issues/64)
+- [Types vs Interface](https://www.educba.com/typescript-type-vs-interface/)
 - [Cleaner TypeScript with the Non Null Assertion Operator](https://medium.com/better-programming/cleaner-typescript-with-the-non-null-assertion-operator-300789388376)
 
 ## Type Inference
@@ -636,3 +636,42 @@ const arrayOfDescribable: haveDescribeFunction[] = [];
 arrayOfDescribable.push(mrBernard, suki);
 console.log(arrayOfDescribable); //(2) [Teacher, Student]
 ```
+
+### The differences between Type and Interface
+
+I was on an interview and was asked this question, but I couldn't gave the interviewer a good answer and thus I decided to thoroughly find the definitive answer for this question. Initially I have always thought that use cases for Type and Interface is a bit similar, but after properly researching it's purpose and definition it game a good idea on their use cases.
+
+| Basis Of Comparison Between TypeScript Type vs Interface | TypeScript Type                                                                    | TypeScript Interface                                                            |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Definition                                               | It allows the creation of the new name for a type.                                 | An interface provides the powerful way to define entities.                      |
+| Capability                                               | In TypeScript, Types are with fewer capabilities comparatively.                    | In TypeScript, Interface provides us with more capabilities.                    |
+| Declarations                                             | Type cannot have multiple merged declarations.                                     | An interface can have multiple merged declarations.                             |
+| Extend                                                   | Type for an object cannot be used.                                                 | An interface can be used in conjunction with other keywords.                    |
+| Identical Name                                           | In TypeScript, if two types are having identical names it will throw an exception. | In TypeScript, if two interfaces are having identical names it will get merged. |
+| Implemented                                              | Type cannot be implemented, it can be declared only.                               | Interface members are getting implemented by the derived class.                 |
+
+I find this table really good to highlights the differences between Type and Interface that I found from this [website](https://www.educba.com/typescript-type-vs-interface/), from this table we can see clearly that Type and Interface is designed for a very different purpose and on that Declaration section I see something unfamiliar which is **Merged Declarations**.
+
+### Merged Declarations
+
+The most common use of this feature is interface merging, which looks like something like this.
+
+```typescript
+interface Car {
+  color: string;
+  horsePower: number;
+}
+
+let bmw: Car = {
+  color: "black",
+  horsePower: 360,
+  brand: "BMW",
+};
+
+// interface declaration is hoisted.
+interface Car {
+  brand: string;
+}
+```
+
+Both of the interface declaration are merged into a single declaration. Personally I think of this feature as something that I will not use but something that I will watch out for, because if I didn't know that such behaviour exist I will assume that the Car interface will just be overwritten with the second interface declaration.
