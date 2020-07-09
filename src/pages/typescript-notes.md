@@ -675,3 +675,34 @@ interface Car {
 ```
 
 Both of the interface declaration are merged into a single declaration. Personally I think of this feature as something that I will not use but something that I will watch out for, because if I didn't know that such behaviour exist I will assume that the Car interface will just be overwritten with the second interface declaration.
+
+## Generics
+
+Generics is a bit hard to explain, it is acts like a programmable `any` type. Imagine having to write a `console.log()` function by ourself, `console.log()` is an amazing function because it is consistent and have a very well-defined use case. it tries to print out given parameter as a string in the log. The amazing thing about it is how flexible it is, It obviously accept a string, number, boolean, and all other primitive data types but it also prints out data structures like object and array. This is a good scenario to use Generics, what it does is captures the property of the parameter. Here's an example:
+
+```typescript
+const randomStudent = {
+  name: "Suki",
+  age: 24,
+};
+// you can actually use another alphabet inside angle brackets, but it is the convention to use the alphabet T
+const addHomeRoom = <T>(student: T) => {
+  return { ...student, homeRoom: "Mr.Bernard" };
+};
+console.log(addHomeRoom(randomStudent));
+```
+
+In the code above, we use generics to capture the student object and add another property to the object. However right now that generics pretty much does `any` type does, if you provide a string as the parameter the function will take that string in and tries to add a key value pair to the string which makes no sense at all.
+
+```typescript
+const randomStudent = {
+  name: "Suki",
+  age: 24,
+};
+// This generics now only accept an object that have the provided properties
+const addHomeRoom = <T extends { name: string; age: number }>(student: T) => {
+  return { ...student, homeRoom: "Mr.Bernard" };
+};
+console.log(addHomeRoom(randomStudent)); //valid
+console.log(addHomeRoom("Suki")); // will not compile
+```

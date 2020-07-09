@@ -1,34 +1,37 @@
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
-import React, { useState, useEffect, useRef } from "react"
-import { AiOutlineBlock } from "react-icons/ai"
-import styled from "styled-components"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { Illustration, Shape, Rect, Box, useRender } from "react-zdog"
-import { a, useSpring } from "@react-spring/zdog"
+import { graphql } from "gatsby";
+import Img from "gatsby-image";
+import React, { useState, useEffect, useRef } from "react";
+import { AiOutlineBlock } from "react-icons/ai";
+import styled from "styled-components";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { Illustration, Shape, Rect, Box, useRender } from "react-zdog";
+import { a, useSpring } from "@react-spring/zdog";
 
-const TAU = Math.PI * 2
+const TAU = Math.PI * 2;
 const Ring = props => {
-  const [up, setUp] = useState(true)
-  useEffect(() => void setInterval(() => setUp(previous => !previous), 450), [])
+  const [up, setUp] = useState(true);
+  useEffect(
+    () => void setInterval(() => setUp(previous => !previous), 450),
+    []
+  );
   const { rotation } = useSpring({
     rotation: Math.PI,
-  })
-  const ref = useRef()
-  let t = 0
+  });
+  const ref = useRef();
+  let t = 0;
   useRender(() => {
-    ref.current.rotate.x += props.speed
-    ref.current.rotate.y += props.speed
-  })
+    ref.current.rotate.x += props.speed;
+    ref.current.rotate.y += props.speed;
+  });
   return (
     <Shape ref={ref} stroke={0} color="#747B9E">
       <a.Anchor rotate={rotation.interpolate(r => ({ x: TAU / 18 + -r / 4 }))}>
         <Rect width={50} height={50} stroke={1} color="#A4A4A4" />
       </a.Anchor>
     </Shape>
-  )
-}
+  );
+};
 
 const Subheader = styled.h3`
   color: #373737;
@@ -36,7 +39,7 @@ const Subheader = styled.h3`
   margin-top: 20px;
   text-align: center;
   width: 100%;
-`
+`;
 const MainHeader = styled.h1`
   color: #373737;
   margin-top: 20px;
@@ -45,7 +48,7 @@ const MainHeader = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const IntroPaper = styled.div`
   background-color: #ffffff;
@@ -64,7 +67,7 @@ const IntroPaper = styled.div`
     margin: 0;
     width: 100%;
   }
-`
+`;
 
 const IntroContainer = styled.div`
   display: flex;
@@ -73,7 +76,7 @@ const IntroContainer = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-`
+`;
 
 export default ({ data }) => {
   return (
@@ -105,14 +108,15 @@ export default ({ data }) => {
                 />
               </Illustration>
             </div>
+            <p>3D illustration above was made with Zdog library.</p>
             <Subheader>{data.site.siteMetadata.introduction}</Subheader>
             <Subheader>{data.site.siteMetadata.description}</Subheader>
           </IntroPaper>
         </IntroContainer>
       </Layout>
     </>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query {
@@ -135,4 +139,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
