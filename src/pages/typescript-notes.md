@@ -3,7 +3,7 @@ title: "My personal notes on Typescript"
 date: "2020-06-03"
 ---
 
-![typescript-banner](https://www.tsmean.com/assets/img/typescript-vs-javascript.svg)
+![My personal notes on Typescript :](https://www.tsmean.com/assets/img/typescript-vs-javascript.svg)
 
 # Introduction
 

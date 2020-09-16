@@ -4,7 +4,7 @@ date: "2020-02-14"
 ---
 
 
-![react-native-banner](https://hackernoon.com/drafts/ro2832a9.png)
+![Learning React Native with an understanding of React: ](https://hackernoon.com/drafts/ro2832a9.png)
 
 
 ## Intro

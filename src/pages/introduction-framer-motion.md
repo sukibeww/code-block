@@ -1,7 +1,9 @@
 ---
-title: "Framer Motion in React"
+title: "Framer Motion Introduction in React"
 date: "2020-09-16"
 ---
+
+![Framer Motion Introduction: ](https://repository-images.githubusercontent.com/157846876/70574400-9e6a-11e9-8708-22d4bf4c3322)
 
 In this post I'll include all of the key points from this [Framer Motion Tutorial by NetNinja ](https://www.youtube.com/watch?v=2V1WK-3HQNk&list=PL4cUxeGkcC9iHDnQfTHEVVceOEBsOf07i&index=1).
 
@@ -92,12 +94,12 @@ It is important to note that the default value of animation type changes depends
  initial={{scale: 0}}
  animate={{scale: 1.5}}
  transition={{ type: 'spring' }}>
- <motion.h1
- initial={{ opacity: 0 }}
- animate={{ fontSize: 50, color: '#fffff', opacity: 1}}
- transition={{ type: 'tween', delay: 0.5 }}>
-  Title
- </motion.h1>
+  <motion.h1
+  initial={{ opacity: 0 }}
+  animate={{ fontSize: 50, color: '#fffff', opacity: 1}}
+  transition={{ type: 'tween', delay: 0.5 }}>
+    Title
+  </motion.h1>
 </motion.div>
 ```
 
@@ -111,12 +113,12 @@ It is important to note that the default value of animation type changes depends
  initial={{scale: 0}}
  animate={{scale: 1.5}}
  transition={{ type: 'spring' }}>
- <motion.h1
- initial={{ opacity: 0 }}
- animate={{ fontSize: 50, color: '#fffff', opacity: 1}}
- transition={{ type: 'tween', delay: 0.5 }}>
-  Title
- </motion.h1>
+  <motion.h1
+  initial={{ opacity: 0 }}
+  animate={{ fontSize: 50, color: '#fffff', opacity: 1}}
+  transition={{ type: 'tween', delay: 0.5 }}>
+    Title
+  </motion.h1>
 </motion.div>
 ```
 
