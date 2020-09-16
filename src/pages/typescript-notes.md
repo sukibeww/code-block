@@ -706,3 +706,5 @@ const addHomeRoom = <T extends { name: string; age: number }>(student: T) => {
 console.log(addHomeRoom(randomStudent)); //valid
 console.log(addHomeRoom("Suki")); // will not compile
 ```
+
+This is a very long post, I'll try to make it into a bite size post in the near future. Thank you for reading.

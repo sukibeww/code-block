@@ -21,6 +21,7 @@ const IntroPaper = styled.div`
   width: 75%;
   @media (max-width: 1200px) {
     width: 100%;
+    padding: 10px;
   }
 `
 
@@ -50,15 +51,20 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: auto;
-  max-width: 90%;
+  overflow: hidden;
+  max-width: 100%;
   .gatsby-highlight {
-    width: 90%;
+    width: 100%;
   }
   pre {
     max-width: 100%;
     align-self: center;
-    overflow-x: scroll;
+    overflow-x: auto;
+  }
+  table {
+    max-width: 100%;
+    overflow: scroll;
+    display: block;
   }
   p {
     text-align: center;
