@@ -7,6 +7,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Illustration, Shape, Rect, Box, useRender } from "react-zdog";
 import { a, useSpring } from "@react-spring/zdog";
+import ArticleSkeleton from "../components/articleSkeleton";
 
 const TAU = Math.PI * 2;
 const Ring = props => {
@@ -72,10 +73,11 @@ const IntroPaper = styled.div`
 const IntroContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
+  min-height: 100vh;
 `;
 
 export default ({ data }) => {
@@ -84,6 +86,8 @@ export default ({ data }) => {
       <Layout>
         <SEO title="Home" />
         <IntroContainer>
+          {!data.site.siteMetadata ? 
+            <ArticleSkeleton /> : 
           <IntroPaper>
             <MainHeader>
               Welcome to {data.site.siteMetadata.title} <AiOutlineBlock />{" "}
@@ -111,7 +115,7 @@ export default ({ data }) => {
             <p>3D illustration above was made with Zdog library.</p>
             <Subheader>{data.site.siteMetadata.introduction}</Subheader>
             <Subheader>{data.site.siteMetadata.description}</Subheader>
-          </IntroPaper>
+          </IntroPaper>}
         </IntroContainer>
       </Layout>
     </>

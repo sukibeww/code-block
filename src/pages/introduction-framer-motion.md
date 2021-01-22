@@ -1,6 +1,7 @@
 ---
 title: "Framer Motion Introduction in React"
 date: "2020-09-16"
+postId: "4"
 ---
 
 ![Framer Motion Introduction: ](https://repository-images.githubusercontent.com/157846876/70574400-9e6a-11e9-8708-22d4bf4c3322)

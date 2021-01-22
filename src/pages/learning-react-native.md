@@ -1,6 +1,7 @@
 ---
 title: "Learning React Native with an understanding of React"
 date: "2020-02-14"
+postId: "3"
 ---
 
 

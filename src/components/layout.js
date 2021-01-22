@@ -132,6 +132,7 @@ const Layout = ({ children }) => {
             frontmatter {
               date(formatString: "DD MMMM, YYYY")
               title
+              postId
             }
             fields {
               slug
@@ -184,10 +185,10 @@ const Layout = ({ children }) => {
         <PostContainer>
           <PostCount>{data.allMarkdownRemark.totalCount} Posts</PostCount>
           <PostsWrapper>
-            {displayedPosts.map(({ node }, index) => (
+            {displayedPosts.map(({ node }) => (
               <PostPaper key={node.id}>
                 <Link
-                  to={`/blog/${data.allMarkdownRemark.totalCount - index}`}
+                  to={`/blog/${node.frontmatter.postId}`}
                   style={{ color: "#373737" }}
                 >
                   <h3>

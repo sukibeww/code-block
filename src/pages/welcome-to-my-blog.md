@@ -1,6 +1,7 @@
 ---
 title: "Welcome to my blog"
 date: "2020-02-04"
+postId: "1"
 ---
 
 ![Hi All!](https://media.giphy.com/media/N053sGBfu704/giphy.gif)

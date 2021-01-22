@@ -2,6 +2,7 @@ import { Link } from "gatsby"
 import React from "react"
 import { IoIosArrowBack } from "react-icons/io"
 import styled from "styled-components"
+import ArticleSkeleton from "../components/articleSkeleton"
 import Disqus from "../components/comment"
 import Layout from "../components/layout"
 import Pagination from "../components/pagination"
@@ -83,6 +84,7 @@ export default ({ data, pageContext }) => {
     <Layout>
       <SEO title={data.markdownRemark.frontmatter.title} />
       <IntroContainer>
+        {!post ? <ArticleSkeleton/> : 
         <IntroPaper>
           <Back>
             <Link style={{ color: "inherit", textDecoration: "none" }} to="/">
@@ -93,7 +95,7 @@ export default ({ data, pageContext }) => {
           </Back>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <Content dangerouslySetInnerHTML={{ __html: post.html }} />
-        </IntroPaper>
+        </IntroPaper>}
       </IntroContainer>
       <Pagination pageContext={pageContext} />
       <Disqus disqusConfig={disqusConfig} />
