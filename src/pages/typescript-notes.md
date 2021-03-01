@@ -1,7 +1,7 @@
 ---
 title: "My personal notes on Typescript"
 date: "2020-06-03"
-postId: "2"
+postId: "3"
 ---
 
 ![My personal notes on Typescript :](https://www.tsmean.com/assets/img/typescript-vs-javascript.svg)

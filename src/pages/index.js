@@ -1,5 +1,4 @@
 import { graphql } from "gatsby";
-import Img from "gatsby-image";
 import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineBlock } from "react-icons/ai";
 import styled from "styled-components";
@@ -11,16 +10,10 @@ import ArticleSkeleton from "../components/articleSkeleton";
 
 const TAU = Math.PI * 2;
 const Ring = props => {
-  const [up, setUp] = useState(true);
-  useEffect(
-    () => void setInterval(() => setUp(previous => !previous), 450),
-    []
-  );
   const { rotation } = useSpring({
     rotation: Math.PI,
   });
   const ref = useRef();
-  let t = 0;
   useRender(() => {
     ref.current.rotate.x += props.speed;
     ref.current.rotate.y += props.speed;
